@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {environment } from '../../environments/environment';
 import { User } from '../user';
+import{ Repo} from '../repo';
+
 
 
 @Injectable({
@@ -10,10 +12,11 @@ import { User } from '../user';
 export class InfoRequestService {
 
   user: User;
-  // datein: User;
+  repo:Repo[];
 
   constructor(private http:HttpClient) {
     this.user= new User("","", 0,0,0,new Date);
+    this.repo= [];
    }
    infoRequest(name:string){
     interface ApiRes{
@@ -43,5 +46,31 @@ export class InfoRequestService {
       })
     })
     return promise
+  }
+
+  displayRepo(repo) {
+    interface ApiRes{
+      name: string;
+      description: string;
+      homepage: string;
+    }
+    let promise = new Promise((resolve, reject) => {
+      this.http.get<ApiRes>("https://api.github.com/users/" +repo +"/repos?access_token=" +environment.pass).toPromise().then(
+          response => {
+            for (var i in response) {
+              this.repo.push(response[i]);
+            }
+            console.log(this.repo)
+            resolve();
+          },
+          error => {
+            this.user.avatar = "";
+            this.user.username = "";
+
+            reject(error);
+          })
+       
+    });
+    return promise;
   }
 }

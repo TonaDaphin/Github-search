@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Repo } from '../repo';
 import { environment } from 'src/environments/environment';
 import { User} from '../user';
+import{ InfoRequestService } from '../info-http/info-request.service';
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-repository',
@@ -11,27 +13,42 @@ import { User} from '../user';
 })
 export class RepositoryComponent implements OnInit {
 
-repo:Repo;
+// repo:Repo[];
+// user: User;
 
-  constructor(private http:HttpClient)
+  constructor(private http:HttpClient,
+    private inforequest: InfoRequestService,
+    // private router: ActivatedRoute
+    )
     { }
-    seeRepo(newUser:string){
-      interface ApiRes{
-        name:string;
-        description: string;
-        homepage: string;
-      }
-      this.http.get<ApiRes>("https://api.github.com/users/"+newUser+"?access_token="+(environment.pass)).subscribe(data1=>{
-        // Succesful API request
-        this.repo = new Repo(data1.name, data1.description, data1.homepage)
-      }
-      , err =>{
-        this.repo = new Repo("Sorry, an error occured",""," ")
-        console.log("An error occured")
-      }
-      )
-    }
+    // displayRepo(repo) {
+    //   interface ApiRes{
+    //     name: string;
+    //     description: string;
+    //     homepage: string;
+    //   }
+    //   let promise = new Promise((resolve, reject) => {
+      
+    //     this.http.get<ApiRes>("https://api.github.com/users/" +repo +"/repos?access_token=" +environment.pass).toPromise().then(
+    //       response => {
+    //         for (var i in response) {
+    //           this.repo.push(response[i]);
+    //         }
+    //         console.log(this.repo)
+    //         resolve();
+    //       },
+    //       error => {
+    //         this.user.avatar = "";
+    //         this.user.username = "";
+
+    //         reject(error);
+    //       })
+    //     })  
+    // }
   ngOnInit() {
+    // let id = this.router.snapshot.paramMap.get("id");
+    // this.inforequest.displayRepo(id);
+    // this.repo = this.inforequest.repo;
   }
 
 }

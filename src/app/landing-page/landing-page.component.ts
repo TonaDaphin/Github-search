@@ -3,7 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { User} from '../user';
 import { environment } from 'src/environments/environment';
 import{ InfoRequestService } from '../info-http/info-request.service';
-// import { ActivatedRoute } from "@angular/router";
+import { Repo } from '../repo';
+import { ActivatedRoute } from "@angular/router";
+
 
 @Component({
   selector: 'app-landing-page',
@@ -13,11 +15,39 @@ import{ InfoRequestService } from '../info-http/info-request.service';
 export class LandingPageComponent implements OnInit {
 
   user:User;
+  repo:Repo[];
 
   constructor(private http:HttpClient,
      private inforequest: InfoRequestService,
-    //  private router: ActivatedRoute
+     private router: ActivatedRoute
+    
     ) { }
+
+    displayRepo(repo) {
+      interface ApiRes{
+        name: string;
+        description: string;
+        homepage: string;
+      }
+      let promise = new Promise((resolve, reject) => {
+      
+        this.http.get<ApiRes>("https://api.github.com/users/" +repo +"/repos?access_token=" +environment.pass).toPromise().then(
+          response => {
+            for (var i in response) {
+              this.repo.push(response[i]);
+            }
+            console.log(this.repo)
+            resolve();
+          },
+          error => {
+            this.user.avatar = "";
+            this.user.username = "";
+
+            reject(error);
+          })
+        })  
+    }
+
  searchUser(newUser:string){
   interface ApiRes{
     login:string;
@@ -43,6 +73,10 @@ ngOnInit() {
   this.inforequest.infoRequest(name);
 
   this.user = this.inforequest.user;
+
+  let id = this.router.snapshot.paramMap.get("id");
+  this.inforequest.displayRepo(id);
+  this.repo = this.inforequest.repo;
  }
 
 }
