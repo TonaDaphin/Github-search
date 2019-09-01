@@ -1,0 +1,17 @@
+- ajv@6.6.2 node_modules/@angular-devkit/architect/node_modules/ajv
+- @angular-devkit/core@7.2.4 node_modules/@angular-devkit/architect/node_modules/@angular-devkit/core
+github@0.0.0 /home/wecode/Documents/Projectnew/Github Search/Github
+├── @angular-devkit/architect@0.803.2  extraneous
+├─┬ @angular-devkit/build-angular@0.12.4
+│ ├── @angular-devkit/architect@0.12.4 
+│ └─┬ @angular-devkit/build-webpack@0.12.4
+│   └── @angular-devkit/architect@0.12.4 
+├─┬ @angular-devkit/core@8.3.2 
+│ └── rxjs@6.4.0 
+├── @angular-devkit/schematics@8.3.2  extraneous
+├─┬ @angular/cli@7.2.4
+│ └── @angular-devkit/architect@0.12.4 
+├── ajv@6.10.2 
+├── UNMET PEER DEPENDENCY jquery@1.9.1 - 3
+└── popper.js@1.15.0  extraneous
+

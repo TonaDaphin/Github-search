@@ -1,0 +1,47 @@
+<div class="container-fluid">
+    <ng-progress></ng-progress>
+  <h2 class="text-center">Github Search</h2>
+  <form>
+    <div class="form-group">
+        <label for="name">Username</label>
+          <input class="form-control form-control-sm" type="text" id="inputSmall"
+          #newUser (keyup.enter)="searchUser(newUser.value)">
+        <!-- <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+          <p>Name is required</p>
+        </div> -->
+<!-- Testing to see if we get any data -->
+        <br><br>
+        <button type="submit" class="btn btn-info" (click)="searchUser(newUser.value)">Submit</button>
+    </div>
+    </form>
+    <div>
+    <p>Username:  {{user.username}}<img src="{{user.avatar}}" width="10%"></p>
+    <p>Repositories:{{user.repos}}</p>
+    <p>Followers:{{user.followers}}</p>
+    <p>Following:{{user.following}}</p>
+    <p>Created repo: {{user.createdDate|date}}</p>
+    <br>
+  </div>
+
+  <!-- <button type="submit" class="btn btn-info" (click)="seeRepo()">See Repos</button> -->
+    <!-- <div class="form-group">
+
+        <label for="description">Description</label>
+        <textarea class="form-control" id="description" rows="4" 
+        [(ngModel)]="newGoal.description" name="description" #description="ngModel" required></textarea>
+        <div [hidden]="description.valid || description.pristine" class="alert alert-danger">
+          <p>Description is required</p>
+        </div>
+    </div>
+    <div class="form-group">
+
+        <label for="complete">Completion</label>
+        <input type='date' id="complete" 
+        [(ngModel)]="newGoal.completeDate" name="completeDate" #completeDate="ngModel" required>
+        <div [hidden]="completeDate.valid || completeDate.pristine" class="alert alert-danger">
+          <p>Date is required</p>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">Add Goal</button>
+</form> -->
+</div>
